@@ -9,6 +9,7 @@
     <meta name="author" content="srt.bz" />
     
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="css/iziToast.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/icomoon.css">
@@ -43,16 +44,21 @@
           <div class="col-sm">
             <div class="probootstrap-text">
               <div class="probootstrap-subheading mb-5">
-                <p class="h1 font-weight-normal">Unleash The Power of The Link with <u>srt.bz</u></p>
+                <p class="h1 font-weight-normal">Unlock The True Power of The Link with <u>srt.bz</u></p>
               </div>
-              <h1 class="probootstrap-heading text-white mb-4">
-                  <div class="input-group input-group-lg">
-                      <input type="text" style="background: rgba(0, 0, 0, 0.2) !important;" class="form-control transparent-input" placeholder="Paste a link to shorten it..." aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
-                      <div class="input-group-append">
-                          <button class="btn btn-primary btn-outline-white" type="button">srt.bz it!</button>
+                <form class="needs-validation" id="test1" novalidate>
+                  <h1 class="probootstrap-heading text-white mb-4">
+                      <div class="input-group input-group-lg">
+                          <input type="text" id="urlInput" style="background: rgba(0, 0, 0, 0.2) !important;" class="form-control transparent-input" value="www.google.com" placeholder="Paste a link to shorten it..." aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2" required="true">
+                          <div class="invalid-tooltip">
+                              Please choose a unique and valid username.
+                          </div>
+                          <div class="input-group-append">
+                              <button class="btn btn-primary btn-outline-white" id="urlGenerateBtn" type="button">srt.bz it!</button>
+                          </div>
                       </div>
-                  </div>
-              </h1>
+                  </h1>
+                </form>
               <div class="probootstrap-subheading mb-5">
                 <p class="h3 font-weight-normal">NO MORE LONG URLS's. Shorten your URL so it’s ready to be shared everywhere with <u>srt.bz</u></p>
               </div>
@@ -243,17 +249,104 @@
         </div>
       </div>
     </footer>
-    <!-- Large modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div id="wqew" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                ...
+                <div class="modal-header">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">http://srt.bz/</span>
+                        </div>
+                        <input type="text" class="form-control">
+                        <div class="input-group-append">
+                            <span class="oi oi-clipboard"></span>
+                        </div>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+
+                </div>
+ <!--               <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="shortenURLModel" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title font-weight-bold" >
+                        <a href="http://srt.bz/abcdrf" id="shortenURLHeader" target="_blank">http://srt.bz/***</a>
+                    </h4>
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: center;">
+                                <img class="card-img-top" src="images/qrcode.png" style="width: 10rem;" alt="Card image cap">
+                                <span style="font-size: 10rem;vertical-align: middle;" class="icon-clipboard" onclick="copyToClipBoard();"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <ul class="probootstrap-footer-social list-unstyled">
+                                    <li><a href="#"><span class="icon-twitter" style="color: #000000b3;"></span></a></li>
+                                    <li><a href="#"><span class="icon-facebook" style="color: #000000b3;"></span></a></li>
+                                    <li><a href="#"><span class="icon-instagram" style="color: #000000b3;"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" style="color: #101214 !important;"
+                                       id="targetURL" placeholder="targetURL"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 control-label">
+                                <span style="font-size: 2rem;float: right;margin-bottom: 1rem;" class="icon-link"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" style="color: #101214 !important;"
+                                       id="shortenSufix" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">link It !</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="js/iziToast.min.js" type="text/javascript"></script>
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
