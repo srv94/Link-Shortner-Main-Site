@@ -32,11 +32,19 @@ function generateURL() {
 }
 
 function generateShortenURL(url) {
-    $('#targetURL').val(url)
-    createNotificationForURL();
-    $('#shortenURLHeader').text(baseURL + 'abcdef');
-    $('#shortenSufix').val('abcdef')
-    $('#shortenURLModel').modal('show');
+    $.ajax({
+        url: "http://localhost:8080/openapi?url="+encodeURIComponent(url),
+        cache: true,
+        success: function(result){
+            console.log("asd : "  +result);
+            $('#targetURL').val(result.targetURL)
+            createNotificationForURL();
+            $('#shortenURLHeader').text(result.shortURL);
+            $('#shortenURLHeader').attr('href',result.shortURL);
+            $('#shortenSufix').val(result.shortURL);
+            $('#shortenURLModel').modal('show');
+        }
+    });
 }
 
 function showNotification(type,msg) {
@@ -54,6 +62,10 @@ function showNotification(type,msg) {
 }
 
 function copyToClipBoard(){
+    /* Select the text field */
+    $("#shortenSufix").select();
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
     iziToast.info({
         id: 'info',
         title: 'Info',
