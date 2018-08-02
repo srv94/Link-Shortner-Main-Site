@@ -15,7 +15,15 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head>
+
+  </head><div id="fb-root"></div>
+  <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
         <div class="container">
@@ -50,7 +58,7 @@
                 <form class="needs-validation" id="test1" novalidate>
                   <h1 class="probootstrap-heading text-white mb-4">
                       <div class="input-group input-group-lg">
-                          <input type="text" id="urlInput" style="background: rgba(0, 0, 0, 0.2) !important;" class="form-control transparent-input" value="www.google.com" placeholder="Paste a link to shorten it..." aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2" required="true">
+                          <input type="text" id="urlInput" style="background: rgba(0, 0, 0, 0.2) !important;" class="form-control transparent-input clearable" value="www.google.com" placeholder="Paste a link to shorten it..." aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2" required="true">
                           <div class="invalid-tooltip">
                               Please choose a unique and valid username.
                           </div>
@@ -308,15 +316,15 @@
                     <form class="form-horizontal" role="form">
                         <div class="row">
                             <div class="col-sm-12" style="text-align: center;">
-                                <img class="card-img-top" src="images/qrcode.png" style="width: 10rem;" alt="Card image cap">
-                                <span style="font-size: 10rem;vertical-align: middle;" class="icon-clipboard" onclick="copyToClipBoard();"></span>
+                                <img id="QRCodeURL" class="card-img-top" src="images/qrcode.png" style="width: 10rem;" alt="Card image cap">
+                                <span style="font-size: 7rem;vertical-align: middle;" class="icon-clipboard" onclick="copyToClipBoard();"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" style="text-align: center;">
                                 <ul class="probootstrap-footer-social list-unstyled">
-                                    <li><a href="#"><span class="icon-twitter" style="color: #000000b3;"></span></a></li>
-                                    <li><a href="#"><span class="icon-facebook" style="color: #000000b3;"></span></a></li>
+                                    <li><a href="#"><span class="icon-twitter" data-js="twitter-share" style="color: #000000b3;"></span></a></li>
+                                    <li><a href="#"><span class="icon-facebook" data-js="facebook-share" style="color: #000000b3;"></span></a></li>
                                     <li><a href="#"><span class="icon-instagram" style="color: #000000b3;"></span></a></li>
                                 </ul>
                             </div>

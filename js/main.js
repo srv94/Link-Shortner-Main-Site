@@ -38,11 +38,12 @@ function generateShortenURL(url) {
         success: function(result){
             console.log("asd : "  +result);
             $('#targetURL').val(result.targetURL)
-            createNotificationForURL();
+            createNotificationForURL(result.shortURL);
             $('#shortenURLHeader').text(result.shortURL);
             $('#shortenURLHeader').attr('href',result.shortURL);
             $('#shortenSufix').val(result.shortURL);
             $('#shortenURLModel').modal('show');
+            $("#QRCodeURL").attr("src", "http://localhost:8080/qrcode?text=" + result.shortURL);
         }
     });
 }
@@ -75,7 +76,7 @@ function copyToClipBoard(){
     });
 }
 
-function createNotificationForURL() {
+function createNotificationForURL(shortURL) {
 
     iziToast.show({
         id: 'haduken',
@@ -103,7 +104,10 @@ function createNotificationForURL() {
                         position: 'topRight',
                         // iconText: 'star',
                     });
-
+                    /* Select the text field */
+                    $("#shortenSufix").select();
+                    /* Copy the text inside the text field */
+                    document.execCommand("copy");
                 },
                 true
             ],
@@ -117,6 +121,7 @@ function createNotificationForURL() {
                         position: 'topRight',
                         // iconText: 'star',
                     });
+                    window.open(shortURL,'_blank');
 
                 }
             ]
@@ -125,6 +130,41 @@ function createNotificationForURL() {
 
 }
 
+
+/**
+ * Clearable text inputs
+ */
+function tog(v){return v?'addClass':'removeClass';}
+$(document).on('input', '.clearable', function(){
+    $(this)[tog(this.value)]('x');
+}).on('mousemove', '.x', function( e ){
+    $(this)[tog(this.offsetWidth-18 < e.clientX-this.getBoundingClientRect().left)]('onX');
+}).on('touchstart click', '.onX', function( ev ){
+    ev.preventDefault();
+    $(this).removeClass('x onX').val('').change();
+});
+
+// $('.clearable').trigger("input");
+// Uncomment the line above if you pre-fill values from LS or server
+
+
+var twitterShare = document.querySelector('[data-js="twitter-share"]');
+
+twitterShare.onclick = function(e) {
+    e.preventDefault();
+    var twitterWindow = window.open('https://twitter.com/share?url=' + $('#shortenSufix').val(), 'twitter-popup', 'height=350,width=600');
+    if(twitterWindow.focus) { twitterWindow.focus(); }
+    return false;
+}
+
+var facebookShare = document.querySelector('[data-js="facebook-share"]');
+
+facebookShare.onclick = function(e) {
+    e.preventDefault();
+    var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + $('#shortenSufix').val(), 'facebook-popup', 'height=350,width=600');
+    if(facebookWindow.focus) { facebookWindow.focus(); }
+    return false;
+}
 
 
 $( document ).ready(function() {
